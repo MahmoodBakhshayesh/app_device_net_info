@@ -18,14 +18,9 @@ class AppDeviceNetworkInfo {
   static Future<AppInfoData> getAppInfo() async {
     final info = await PackageInfo.fromPlatform();
     // String versionKey = Platform.isAndroid ? info.buildNumber : info.buildNumber;
-    String buildNumber = (!Platform.isAndroid) ? info.buildNumber : info.buildNumber.replaceFirst(info.version.replaceAll(".", ""), "");
+    String buildNumber = (!Platform.isAndroid) ? info.buildNumber : info.buildNumber;
 
-    return AppInfoData(
-      name: info.appName,
-      id: info.packageName,
-      versionKey: buildNumber,
-      versionNumber: info.version,
-    );
+    return AppInfoData(name: info.appName, id: info.packageName, versionKey: buildNumber, versionNumber: info.version);
   }
 
   static Future<String> _getOrCreateDeviceId() async {
@@ -44,10 +39,8 @@ class AppDeviceNetworkInfo {
     final width = window.physicalSize.width ~/ window.devicePixelRatio;
     final height = window.physicalSize.height ~/ window.devicePixelRatio;
 
-
     return '${width}x$height';
   }
-
 
   static Size? _getRealScreenResolution() {
     final physicalSize = ui.PlatformDispatcher.instance.implicitView?.physicalSize;
@@ -77,6 +70,10 @@ class AppDeviceNetworkInfo {
           osVersion: android.version.release,
           screenResolution: _getRealScreenResolution(),
           language: _getDeviceLanguage(),
+          timeZoneName: _getDeviceTimeZone(),
+          timeZoneOffsetMinutes: _getDeviceTimeZoneOffsetMinutes(),
+          keyboardLocale: _getDeviceKeyboardLocale(),
+          currentDeviceTime: DateTime.now().toIso8601String(),
         );
       } else if (Platform.isIOS) {
         final ios = await _deviceInfo.iosInfo;
@@ -89,6 +86,10 @@ class AppDeviceNetworkInfo {
           osVersion: ios.systemVersion,
           screenResolution: _getRealScreenResolution(),
           language: _getDeviceLanguage(),
+          timeZoneName: _getDeviceTimeZone(),
+          timeZoneOffsetMinutes: _getDeviceTimeZoneOffsetMinutes(),
+          keyboardLocale: _getDeviceKeyboardLocale(),
+          currentDeviceTime: DateTime.now().toIso8601String(),
         );
       } else {
         return DeviceInfoData(
@@ -97,9 +98,13 @@ class AppDeviceNetworkInfo {
           os: OSType.other,
           screenResolution: _getRealScreenResolution(),
           language: _getDeviceLanguage(),
+          timeZoneName: _getDeviceTimeZone(),
+          timeZoneOffsetMinutes: _getDeviceTimeZoneOffsetMinutes(),
+          keyboardLocale: _getDeviceKeyboardLocale(),
+          currentDeviceTime: DateTime.now().toIso8601String(),
         );
       }
-    }catch(e){
+    } catch (e) {
       log(e.toString());
       rethrow;
     }
@@ -108,12 +113,31 @@ class AppDeviceNetworkInfo {
   static Future<NetworkInfoData> getNetworkInfo() async {
     final connectivity = await Connectivity().checkConnectivity();
     final ip = await _networkInfo.getWifiIP();
+    NetworkType type = NetworkType.other;
+    if (connectivity.contains(ConnectivityResult.wifi)) {
+      type = NetworkType.wifi;
+    }
+    if (connectivity.contains(ConnectivityResult.none)) {
+      type = NetworkType.none;
+    }
+    if (connectivity.contains(ConnectivityResult.bluetooth)) {
+      type = NetworkType.bluetooth;
+    }
+    if (connectivity.contains(ConnectivityResult.ethernet)) {
+      type = NetworkType.ethernet;
+    }
+    if (connectivity.contains(ConnectivityResult.mobile)) {
+      type = NetworkType.cellular;
+    }
+    if (connectivity.contains(ConnectivityResult.vpn)) {
+      type = NetworkType.vpn;
+    }
 
-    final type = switch (connectivity) {
-      ConnectivityResult.wifi => NetworkType.wifi,
-      ConnectivityResult.mobile => NetworkType.cellular,
-      _ => NetworkType.other,
-    };
+    // final type = switch (connectivity) {
+    //   ConnectivityResult.wifi => NetworkType.wifi,
+    //   ConnectivityResult.mobile => NetworkType.cellular,
+    //   _ => NetworkType.other,
+    // };
 
     return NetworkInfoData(type: type, ip: ip);
   }
@@ -123,5 +147,17 @@ class AppDeviceNetworkInfo {
     final device = await getDeviceInfo();
     final network = await getNetworkInfo();
     return AppDeviceNetworkData(app: app, device: device, network: network);
+  }
+
+  static String _getDeviceKeyboardLocale() {
+    return WidgetsBinding.instance.platformDispatcher.locale.toLanguageTag();
+  }
+
+  static String _getDeviceTimeZone() {
+    return DateTime.now().timeZoneName; // e.g., CEST, UTC, PST
+  }
+
+  static int _getDeviceTimeZoneOffsetMinutes() {
+    return DateTime.now().timeZoneOffset.inMinutes; // e.g., 120
   }
 }

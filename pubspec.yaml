@@ -1,6 +1,6 @@
 name: app_device_net_info
 description: "A Flutter package to provide app, device, and network info in JSON format."
-version: 0.0.1
+version: 0.0.5
 homepage: https://github.com/MahmoodBakhshayesh/app_device_net_info
 
 environment:
@@ -10,12 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package_info_plus: ^4.2.0
-  device_info_plus: ^10.1.0
-  connectivity_plus: ^5.0.2
-  network_info_plus: ^4.1.0
+  package_info_plus: ^8.3.0
+  device_info_plus: ^11.5.0
+  connectivity_plus: ^6.1.1
+  network_info_plus: ^6.1.4
   uuid: ^4.3.3
   shared_preferences: ^2.5.3
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

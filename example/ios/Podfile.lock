@@ -1,7 +1,6 @@
 PODS:
   - connectivity_plus (0.0.1):
     - Flutter
-    - ReachabilitySwift
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -9,7 +8,6 @@ PODS:
     - Flutter
   - package_info_plus (0.4.5):
     - Flutter
-  - ReachabilitySwift (5.2.4)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -21,10 +19,6 @@ DEPENDENCIES:
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
-
-SPEC REPOS:
-  trunk:
-    - ReachabilitySwift
 
 EXTERNAL SOURCES:
   connectivity_plus:
@@ -41,12 +35,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
-  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
-  device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
+  connectivity_plus: 2a701ffec2c0ae28a48cf7540e279787e77c447d
+  device_info_plus: bf2e3232933866d73fe290f2942f2156cdd10342
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  network_info_plus: 6d0c3eb8367b8164fa3fb0c19875e3f59d49697f
-  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
-  ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
+  network_info_plus: 6613d9d7cdeb0e6f366ed4dbe4b3c51c52d567a9
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5

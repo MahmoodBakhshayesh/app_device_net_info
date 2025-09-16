@@ -1,4 +1,12 @@
-enum NetworkType { wifi, cellular, other }
+enum NetworkType {
+  wifi,
+  cellular,
+  bluetooth,
+  ethernet,
+  vpn,
+  none,
+  other,
+ }
 
 class NetworkInfoData {
   final NetworkType type;
@@ -6,8 +14,5 @@ class NetworkInfoData {
 
   NetworkInfoData({required this.type, this.ip});
 
-  Map<String, dynamic> toJson() => {
-    'type': type.index,
-    if (ip != null) 'ip': ip,
-  };
+  Map<String, dynamic> toJson() => {'type': type.index, if (ip != null) 'ip': ip};
 }

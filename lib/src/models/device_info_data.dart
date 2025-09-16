@@ -12,6 +12,10 @@ class DeviceInfoData {
   final String? osVersion;
   final Size? screenResolution;
   final String? language;
+  final String? timeZoneName;
+  final int? timeZoneOffsetMinutes;
+  final String? currentDeviceTime;
+  final String? keyboardLocale;
 
   DeviceInfoData({
     this.company,
@@ -22,6 +26,10 @@ class DeviceInfoData {
     this.osVersion,
     this.screenResolution,
     this.language,
+    this.timeZoneName,
+    this.timeZoneOffsetMinutes,
+    this.currentDeviceTime,
+    this.keyboardLocale,
   });
 
   Map<String, dynamic> toJson() => {
@@ -31,7 +39,11 @@ class DeviceInfoData {
     if (model != null) 'model': model,
     'os': os.index,
     if (osVersion != null) 'osVersion': osVersion,
-    if (screenResolution != null) 'screen_resolution': {"width":screenResolution!.width,"height":screenResolution!.height},
-    if (language != null) 'device_language': language,
+    if (screenResolution != null) 'screenResolution': {"width":screenResolution!.width,"height":screenResolution!.height},
+    if (language != null) 'deviceLanguage': language,
+    if (timeZoneName != null) 'timezone': timeZoneName,
+    if (timeZoneOffsetMinutes != null) 'timezoneOffset': timeZoneOffsetMinutes,
+    if (currentDeviceTime != null) 'deviceTime': currentDeviceTime,
+    if (keyboardLocale != null) 'keyboardLocale': keyboardLocale,
   };
 }

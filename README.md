@@ -21,7 +21,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  app_device_network_info: ^0.0.1
+  app_device_network_info: ^0.0.4
 ```
 
 Then run:
@@ -83,22 +83,27 @@ void main() async {
 | versionNumber  | String  | `1.2.3`           |
 
 ### Device Info
-| Field              | Type    | Example             |
-|--------------------|---------|---------------------|
-| manufacturer       | String  | `Samsung`, `Apple`  |
-| type               | int     | `0 = mobile`        |
-| id (UUID)          | String  | `1e5rt71e...`        |
-| model              | String  | `iPhone13,3`        |
-| os                 | int     | `0 = Android, 1 = iOS` |
-| osVersion          | String  | `17.2`, `12`        |
-| screen_resolution  | String  | `1125x2436`         |
-| device_language    | String  | `en-US`, `fa-IR`    |
+| Field                 | Type   | Example                |
+|-----------------------|--------|------------------------|
+| manufacturer          | String | `Samsung`, `Apple`     |
+| type                  | int    | `0 = mobile`           |
+| id (UUID)             | String | `1e5rt71e...`          |
+| model                 | String | `iPhone13,3`           |
+| os                    | int    | `0 = Android, 1 = iOS` |
+| osVersion             | String | `17.2`, `12`           |
+| screenResolution      | String | `1125x2436`            |
+| deviceLanguage        | String | `en-US`                |
+| timezone              | String | `CEST`, `UTC` , `PST`  |
+| timeZoneOffsetMinutes | int    | `120`,                 |
+| currentDeviceTime     | String | `2025-11-23T23:12:44`  |
+| keyboardLocale        | String | `en-US`                |
+
 
 ### Network Info
-| Field       | Type   | Example        |
-|-------------|--------|----------------|
-| type        | int    | `0 = WiFi`     |
-| ip          | String | `192.168.1.105`|
+| Field       | Type   | Example                                                                                           |
+|-------------|--------|---------------------------------------------------------------------------------------------------|
+| type        | int    | `0 = WiFi` ,`1 = Cellular` ,`2 = Bluetooth` ,`3 = Ethernet` ,`4 = Vpn` ,`5 = None` ,`6 = Other` , |
+| ip          | String | `192.168.1.105`                                                                                   |
 
 ---
 
